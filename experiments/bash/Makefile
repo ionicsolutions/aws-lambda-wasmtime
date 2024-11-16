@@ -8,7 +8,7 @@ release:
 
 layer:
 	rm runtime.zip || true
-	zip -j runtime.zip runtime/bootstrap runtime/wasmtime
+	cd runtime && zip -r ../runtime.zip .
 
 package:
 	rm function.zip || true
@@ -18,7 +18,7 @@ package:
 standalone_package:
 	rm function.zip || true
 	$(MAKE) release
-	zip -j function.zip function/target/wasm32-wasip1/release/function.wasm runtime/bootstrap runtime/wasmtime
+	zip -j function.zip function/target/wasm32-wasip1/release/function.wasm runtime/bootstrap runtime/bin/wasmtime
 
 clean:
 	cd function && cargo clean
@@ -26,5 +26,5 @@ clean:
 	rm runtime.zip || true
 
 get_wasmtime:
-	rm runtime/wasmtime || true
+	rm runtime/bin/wasmtime || true
 	./get_wasmtime.sh

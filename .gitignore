@@ -11,4 +11,4 @@
 *.zip
 
 # Wasmtime
-experiments/bash/runtime/wasmtime
+experiments/bash/runtime/bin/wasmtime

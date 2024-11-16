@@ -32,5 +32,6 @@ download_release_from_repo "$version" "$archive_file"
 # Move the binary to the right place
 tar -xvf "$archive_file" "wasmtime-$version-x86_64-linux/wasmtime" --strip-components=1
 chmod +x wasmtime
-mv wasmtime ./runtime/wasmtime
+mkdir -p ./runtime/bin
+mv wasmtime ./runtime/bin/wasmtime
 rm "$archive_file"
