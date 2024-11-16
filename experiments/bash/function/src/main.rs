@@ -1,5 +1,5 @@
 use serde_json::{Value, Result};
-use std::collections::{BTreeMap, HashMap};
+use std::collections::{HashMap};
 use std::env;
 
 fn main() -> Result<()> {
@@ -16,44 +16,30 @@ fn main() -> Result<()> {
         .and_then(|v| v.as_i64())
         .expect("Missing or invalid \"number\" field");
 
-
-    let mut prime_factors = BTreeMap::new();
+    let mut prime_factors = Vec::<i64>::new();
 
     // Handle factor of 2
-    let mut count = 0;
     while number % 2 == 0 {
         number /= 2;
-        count += 1;
-    }
-    if count > 0 {
-        prime_factors.insert(2, count);
+        prime_factors.push(2);
     }
 
     // Handle odd factors
     let mut factor = 3;
     while factor * factor <= number {
-        count = 0;
         while number % factor == 0 {
             number /= factor;
-            count += 1;
-        }
-        if count > 0 {
-            prime_factors.insert(factor, count);
+            prime_factors.push(factor);
         }
         factor += 2;
     }
+
     // Handle remaining prime factor greater than sqrt(number)
     if number > 1 {
-        prime_factors.insert(number, 1);
+        prime_factors.push(number);
     }
 
-    // Expand prime factors into a full list of factors
-    let full_factors: Vec<i64> = prime_factors
-        .iter()
-        .flat_map(|(&prime, &count)| std::iter::repeat(prime).take(count as usize))
-        .collect();
-
-    let result = HashMap::from([("factors", full_factors)]);
+    let result = HashMap::from([("factors", prime_factors)]);
     let output = serde_json::to_string(&result)?;
     println!("{}", output);
 
