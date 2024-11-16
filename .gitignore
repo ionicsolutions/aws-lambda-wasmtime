@@ -1,0 +1,14 @@
+# IDE
+.idea/
+
+# Python
+**/__pycache__/
+
+# Rust
+**/target/
+
+# AWS Lambda
+*.zip
+
+# Wasmtime
+experiments/bash/runtime/wasmtime

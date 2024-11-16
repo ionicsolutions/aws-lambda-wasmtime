@@ -2,5 +2,5 @@
 
 Running WebAssembly on
 [AWS Lambda](https://docs.aws.amazon.com/lambda/)
-using the
+with the
 [`wasmtime`](https://wasmtime.dev/) runtime.
