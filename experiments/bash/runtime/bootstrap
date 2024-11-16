@@ -12,7 +12,8 @@ elif [ -f "/opt/bin/wasmtime" ]; then
   # Use wasmtime provided through a Lambda layer
   WASMTIME="/opt/bin/wasmtime"
 else
-  echo "wasmtime not found"
+  ERROR="{\"error\": \"Did not find wasmtime in the function package or Lambda layer.\", \"errorType\" : \"InvalidFunctionException\"}"
+  curl "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/init/error" -d "$ERROR" --header "Lambda-Runtime-Function-Error-Type: Unhandled"
   exit 1
 fi
 
@@ -20,6 +21,7 @@ fi
 while true
 do
   HEADERS="$(mktemp)"
+
   # Get an event. The HTTP request will block until one is received
   EVENT_DATA=$(curl -sS -LD "$HEADERS" "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next")
 
