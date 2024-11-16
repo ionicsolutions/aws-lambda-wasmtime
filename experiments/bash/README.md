@@ -1,6 +1,6 @@
 # Wasm runtime for AWS Lambda using `bash`, `curl`, and `wasmtime`
 
-This is a basic AWS Lambda Wasm runtime created based on the AWS Lambda
+Basic AWS Lambda Wasm runtime created based on the AWS Lambda
 [Building a custom runtime tutorial](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-walkthrough.html).
 It uses the example `bootstrap` Bash script that uses `curl` to interact with
 the
@@ -8,6 +8,12 @@ the
 and invokes the function through the `wasmtime` CLI.
 The Wasm function receives the input event as a command-line argument and writes its
 response to the standard output.
+
+This is probably the easiest way to run WebAssembly on AWS Lambda.
+However, the function code has to take care of parsing the JSON input,
+and it does not receive the context or tracing headers.
+We also compile the WebAssembly module to native code on each invocation,
+which is not efficient.
 
 ## Setting up
 
