@@ -1,0 +1,10 @@
+[project]
+name = "handler"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12.2"
+dependencies = [
+    "rich>=13.9.4",
+    "wasmtime>=25.0.0",
+]

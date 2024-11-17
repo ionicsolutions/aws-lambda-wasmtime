@@ -12,3 +12,4 @@
 
 # Wasmtime
 experiments/bash/runtime/bin/wasmtime
+experiments/python/output.txt
