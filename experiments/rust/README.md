@@ -12,6 +12,15 @@ by Peter Malmgren and similar to
 (see also
 [second-state/aws-lambda-wasm-runtime](https://github.com/second-state/aws-lambda-wasm-runtime)).
 
+We create a new store and instance for each invocation,
+but share the engine, the linker, and the module.
+Per
+[this comment by Nick Fitzgerald](https://github.com/bytecodealliance/wasmtime/issues/9572#issuecomment-2460415021)
+this seems to be the best practice.
+State sharing is implemented following the pattern shown in the
+[Using shared state](https://docs.aws.amazon.com/lambda/latest/dg/rust-handler.html#rust-shared-state)
+section in the AWS Lambda documentation for the Rust runtime.
+
 The downside is that we deserialize and serialize the data twice,
 because the AWS Lambda Rust runtime deserializes the input payload
 prior to invoking the handler function.
