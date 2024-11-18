@@ -3,9 +3,10 @@ name = "function"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
+[lib]
+crate-type = ["cdylib"]
 
-lambda_runtime = "0.13.0"
-serde = "1"
-serde_json = "1.0.133"
-tokio = { version = "1", features = ["macros"] }
+[dependencies]
+serde = "1.0.215"
+serde-wasm-bindgen = "0.6.5"
+serde_json = "1.0.132"
