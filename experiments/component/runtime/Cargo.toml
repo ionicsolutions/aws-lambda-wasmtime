@@ -1,0 +1,28 @@
+[package]
+name = "runtime"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0.215", features = ["derive"] }
+serde_json = "1.0.133"
+wit-bindgen-rt = { version = "0.35.0", features = ["bitflags"] }
+
+[profile.release]
+codegen-units = 1
+opt-level = "s"
+debug = false
+strip = true
+lto = true
+
+[package.metadata.component]
+package = "component:runtime"
+
+[package.metadata.component.target]
+path = "wit"
+
+[package.metadata.component.bindings]
+derives = ["serde::Serialize", "serde::Deserialize"]
+
+[package.metadata.component.target.dependencies]
+"component:function" = { path = "../function/wit" }

@@ -1,0 +1,5 @@
+package runtime:app;
+
+world app {
+    import component:function/lambda;
+}

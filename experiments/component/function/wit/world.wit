@@ -1,0 +1,18 @@
+package component:function;
+
+interface lambda {
+
+    record event {
+        number: s64
+    }
+
+    record response {
+        factors: list<s64>
+    }
+
+    handler: func(event: event) -> response;
+}
+
+world example {
+    export lambda;
+}
