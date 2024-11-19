@@ -121,7 +121,7 @@ mod _rt {
 /// ```
 #[allow(unused_macros)]
 #[doc(hidden)]
-macro_rules! __export_example_impl {
+macro_rules! __export_lambda_function_impl {
     ($ty:ident) => {
         self::export!($ty with_types_in self);
     };
@@ -132,17 +132,17 @@ macro_rules! __export_example_impl {
     };
 }
 #[doc(inline)]
-pub(crate) use __export_example_impl as export;
+pub(crate) use __export_lambda_function_impl as export;
 #[cfg(target_arch = "wasm32")]
-#[link_section = "component-type:wit-bindgen:0.35.0:component:function:example:encoded world"]
+#[link_section = "component-type:wit-bindgen:0.35.0:component:function:lambda-function:encoded world"]
 #[doc(hidden)]
-pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 271] = *b"\
-\0asm\x0d\0\x01\0\0\x19\x16wit-component-encoding\x04\0\x07\x91\x01\x01A\x02\x01\
+pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 287] = *b"\
+\0asm\x0d\0\x01\0\0\x19\x16wit-component-encoding\x04\0\x07\x99\x01\x01A\x02\x01\
 A\x02\x01B\x07\x01r\x01\x06numberx\x04\0\x05event\x03\0\0\x01px\x01r\x01\x07fact\
 ors\x02\x04\0\x08response\x03\0\x03\x01@\x01\x05event\x01\0\x04\x04\0\x07handler\
-\x01\x05\x04\0\x19component:function/lambda\x05\0\x04\0\x1acomponent:function/ex\
-ample\x04\0\x0b\x0d\x01\0\x07example\x03\0\0\0G\x09producers\x01\x0cprocessed-by\
-\x02\x0dwit-component\x070.220.0\x10wit-bindgen-rust\x060.35.0";
+\x01\x05\x04\0\x19component:function/lambda\x05\0\x04\0\"component:function/lamb\
+da-function\x04\0\x0b\x15\x01\0\x0flambda-function\x03\0\0\0G\x09producers\x01\x0c\
+processed-by\x02\x0dwit-component\x070.220.0\x10wit-bindgen-rust\x060.35.0";
 #[inline(never)]
 #[doc(hidden)]
 pub fn __link_custom_section_describing_imports() {
