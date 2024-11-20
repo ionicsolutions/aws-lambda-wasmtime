@@ -1,4 +1,4 @@
-# Wasm runtime for AWS Lambda using `bash`, `curl`, and `wasmtime`
+# Wasm runtime for AWS Lambda using `bash`, `curl`, and the `wasmtime` CLI
 
 Basic AWS Lambda Wasm runtime created based on the AWS Lambda
 [Building a custom runtime tutorial](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-walkthrough.html).

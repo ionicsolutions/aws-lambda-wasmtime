@@ -1,4 +1,4 @@
-# Wasm runtime for AWS Lambda using `wasmtime`
+# Wasm runtime for AWS Lambda using Rust and `wasmtime`
 
 This PoC uses the
 [Rust runtime for AWS Lambda](https://github.com/awslabs/aws-lambda-rust-runtime)

@@ -1,4 +1,4 @@
-# Passing values between Python and WebAssembly
+# Passing values between Python and WebAssembly modules
 
 This is a hands-on exploration of invoking WebAssembly functions from Python
 and transferring data back and forth using only basic WASI.
@@ -17,6 +17,8 @@ https://elixirforum.com/t/return-string-form-rust-in-wasm/51372/11
 https://benw.is/posts/compiling-rust-to-wasi
 
 https://bytecodealliance.github.io/wasmtime-py/
+
+https://github.com/bytecodealliance/wasmtime/issues/9572#issuecomment-2460415021
 
 ### Multi-value returns
 
@@ -37,4 +39,3 @@ https://blog.rust-lang.org/2024/09/24/webassembly-targets-change-in-default-targ
 As a result there is no longer any possible method of writing a function in Rust that returns multiple values at the WebAssembly function type level.
 
 https://github.com/rust-lang/rust/issues/73755#issuecomment-1577586801
-
