@@ -73,10 +73,10 @@ cargo component build --release
 
 to create a Wasm component under _target/wasm32-wasip1/release_.
 
-In `runtime/Cargo.toml`, set the `component_world` key in `[package.metadata]`
+In _runtime/Cargo.toml_, set the `component_world` key in `[package.metadata]`
 to the path to the Wasm component's _*.wit_ file.
 
-Then, compile the runtime with
+Then, from within the _runtime_ directory, compile the runtime:
 
 ```bash
 cargo lambda build --release --compiler cargo  # Linux x86_64
@@ -87,7 +87,7 @@ This generates the _target/lambda/release/bootstrap_ binary required by AWS Lamb
 
 For testing, set the `_HANDLER` environment variable
 to the relative path to the compiled Wasm component
-and launch a local Lambda function instance use `cargo lambda watch`:
+and launch a local Lambda function instance:
 
 ```bash
 export _HANDLER="../demo-component/target/wasm32-wasip1/release/function.wasm"
@@ -105,7 +105,7 @@ To create a ZIP package for deployment to AWS Lambda,
 combine the `bootstrap` binary with the Wasm component:
 
 ```bash
-zip -j function.zip target/lambda/release/bootstrap demo-component/target/wasm32-wasip1/release/function.wasm
+zip -j function.zip runtime/target/lambda/release/bootstrap demo-component/target/wasm32-wasip1/release/function.wasm
 ```
 
 Upload the ZIP package to AWS Lambda via the AWS Management Console or the AWS CLI:
