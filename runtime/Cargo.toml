@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [package.metadata]
-component_world = "../experiments/component/function/wit/world.wit"
+component_world = "../demo-component/wit/world.wit"
 
 [dependencies]
 lambda_runtime = "0.13.0"
