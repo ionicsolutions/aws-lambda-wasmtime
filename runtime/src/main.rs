@@ -18,7 +18,9 @@ async fn main() -> Result<(), Error> {
     let mut linker = Linker::<BasicState>::new(&engine);
     add_to_linker_sync(&mut linker)?;
 
-    let component_path = env::var("WASM_COMPONENT_PATH")?;
+    let lambda_task_root = env::var("LAMBDA_TASK_ROOT").unwrap_or_else(|_| ".".to_string());
+    let component_file = env::var("_HANDLER")?;
+    let component_path = format!("{}/{}", lambda_task_root, component_file);
     let component = Component::from_file(&engine, component_path)?;
 
     let shared_engine = &engine;

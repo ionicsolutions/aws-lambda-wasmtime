@@ -4,13 +4,7 @@ use wasmtime::component::{bindgen, Component, Linker, ResourceTable};
 use wasmtime::{Engine, Store};
 use wasmtime_wasi::{WasiCtx, WasiCtxBuilder, WasiView};
 
-bindgen!({
-    path: "../experiments/component/function/wit/world.wit",
-    additional_derives: [
-        serde::Deserialize,
-        serde::Serialize,
-    ],
-});
+include!(concat!(env!("OUT_DIR"), "/bindgen_macro.rs"));
 
 pub(crate) async fn function_handler(
     engine: &Engine,
