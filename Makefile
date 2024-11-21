@@ -4,8 +4,8 @@ component:
 	cd demo-component && cargo component build --release
 
 runtime:
-	$(MAKE) function
-	cd runtime && cargo component build
+	$(MAKE) component
+	cd runtime && cargo lambda build --release --compiler cargo
 
 demo:
 	$(MAKE) component
