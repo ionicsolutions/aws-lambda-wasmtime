@@ -8,8 +8,7 @@ pub mod exports {
             pub mod lambda {
                 #[used]
                 #[doc(hidden)]
-                static __FORCE_SECTION_REF: fn() =
-                    super::super::super::super::__link_custom_section_describing_imports;
+                static __FORCE_SECTION_REF: fn() = super::super::super::super::__link_custom_section_describing_imports;
                 use super::super::super::super::_rt;
                 #[repr(C)]
                 #[derive(Clone, Copy, serde::Deserialize, serde::Serialize)]
@@ -17,10 +16,11 @@ pub mod exports {
                     pub number: i64,
                 }
                 impl ::core::fmt::Debug for Event {
-                    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-                        f.debug_struct("Event")
-                            .field("number", &self.number)
-                            .finish()
+                    fn fmt(
+                        &self,
+                        f: &mut ::core::fmt::Formatter<'_>,
+                    ) -> ::core::fmt::Result {
+                        f.debug_struct("Event").field("number", &self.number).finish()
                     }
                 }
                 #[derive(Clone, serde::Deserialize, serde::Serialize)]
@@ -28,7 +28,10 @@ pub mod exports {
                     pub factors: _rt::Vec<i64>,
                 }
                 impl ::core::fmt::Debug for Response {
-                    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                    fn fmt(
+                        &self,
+                        f: &mut ::core::fmt::Formatter<'_>,
+                    ) -> ::core::fmt::Result {
                         f.debug_struct("Response")
                             .field("factors", &self.factors)
                             .finish()
@@ -37,8 +40,7 @@ pub mod exports {
                 #[doc(hidden)]
                 #[allow(non_snake_case)]
                 pub unsafe fn _export_handler_cabi<T: Guest>(arg0: i64) -> *mut u8 {
-                    #[cfg(target_arch = "wasm32")]
-                    _rt::run_ctors_once();
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
                     let result0 = T::handler(Event { number: arg0 });
                     let ptr1 = _RET_AREA.0.as_mut_ptr().cast::<u8>();
                     let Response { factors: factors2 } = result0;
@@ -78,7 +80,9 @@ pub mod exports {
                 pub(crate) use __export_component_function_lambda_cabi;
                 #[repr(align(4))]
                 struct _RetArea([::core::mem::MaybeUninit<u8>; 8]);
-                static mut _RET_AREA: _RetArea = _RetArea([::core::mem::MaybeUninit::uninit(); 8]);
+                static mut _RET_AREA: _RetArea = _RetArea(
+                    [::core::mem::MaybeUninit::uninit(); 8],
+                );
             }
         }
     }

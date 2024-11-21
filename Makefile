@@ -17,4 +17,4 @@ clean:
 
 fmt:
 	cd runtime && cargo fmt
-	cd demo-component && cargo fmt
+	cd demo-component && cargo +nightly fmt
