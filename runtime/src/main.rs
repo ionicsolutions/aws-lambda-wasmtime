@@ -7,7 +7,7 @@ use wasmtime::Engine;
 use wasmtime_wasi::add_to_linker_sync;
 
 mod wasm_handler;
-use wasm_handler::{function_handler, BasicState};
+use wasm_handler::{function_handler, BasicState, LambdaFunctionPre};
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
@@ -23,11 +23,13 @@ async fn main() -> Result<(), Error> {
     let component_path = format!("{}/{}", lambda_task_root, component_file);
     let component = Component::from_file(&engine, component_path)?;
 
+    let instance_pre = linker.instantiate_pre(&component)?;
+    let pre_instantiated_component = LambdaFunctionPre::new(instance_pre)?;
+
     let shared_engine = &engine;
-    let shared_linker = &linker;
-    let shared_component = &component;
+    let shared_pre_instantiated_component = &pre_instantiated_component;
     run(service_fn(move |event: LambdaEvent<Value>| async move {
-        function_handler(&shared_engine, &shared_linker, &shared_component, event).await
+        function_handler(&shared_engine, &shared_pre_instantiated_component, event).await
     }))
     .await
 }
