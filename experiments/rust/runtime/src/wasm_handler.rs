@@ -21,8 +21,8 @@ pub(crate) async fn function_handler(
         .inherit_stderr()
         .build();
 
-    let mut store = Store::new(&engine, wasi);
-    let instance = linker.instantiate(&mut store, &module)?;
+    let mut store = Store::new(engine, wasi);
+    let instance = linker.instantiate(&mut store, module)?;
     let function = instance.get_typed_func::<(), ()>(&mut store, "lambda_handler")?;
 
     function.call(&mut store, ())?;

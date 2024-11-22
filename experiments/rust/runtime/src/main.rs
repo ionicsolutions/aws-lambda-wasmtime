@@ -24,7 +24,7 @@ async fn main() -> Result<(), Error> {
     let shared_linker = &linker;
     let shared_module = &module;
     run(service_fn(move |event: LambdaEvent<Value>| async move {
-        function_handler(&shared_engine, &shared_linker, &shared_module, event).await
+        function_handler(shared_engine, shared_linker, shared_module, event).await
     }))
     .await
 }

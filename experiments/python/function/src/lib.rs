@@ -39,11 +39,11 @@ fn calculate_prime_factors(mut number: i64) -> Vec<i64> {
 
 #[link(wasm_import_module = "host")]
 extern "C" {
-    fn report_factor(factor: i64) -> ();
+    fn report_factor(factor: i64);
 }
 
 #[no_mangle]
-pub fn calculate_and_report(number: i64) -> () {
+pub fn calculate_and_report(number: i64) {
     let factors = calculate_prime_factors(number);
     for factor in factors {
         unsafe {
@@ -53,7 +53,7 @@ pub fn calculate_and_report(number: i64) -> () {
 }
 
 #[no_mangle]
-pub fn read_from_env_and_report() -> () {
+pub fn read_from_env_and_report() {
     let number = std::env::var("NUMBER")
         .expect("NUMBER must be set")
         .parse::<i64>()
@@ -62,7 +62,7 @@ pub fn read_from_env_and_report() -> () {
 }
 
 #[no_mangle]
-pub fn read_from_args_and_report() -> () {
+pub fn read_from_args_and_report() {
     let args: Vec<String> = std::env::args().collect();
     if args.len() < 2 {
         println!("Usage: <program> <number>");
@@ -78,7 +78,7 @@ struct Factors {
 }
 
 #[no_mangle]
-pub fn calculate_and_print_json(number: i64) -> () {
+pub fn calculate_and_print_json(number: i64) {
     let prime_factors = Factors {
         factors: calculate_prime_factors(number),
     };
@@ -109,6 +109,5 @@ pub fn calculate_and_store_json_no_forget(number: i64) -> *mut u8 {
         .unwrap()
         .as_bytes()
         .to_owned();
-    let factors_ptr = factors.as_mut_ptr();
-    factors_ptr
+    factors.as_mut_ptr()
 }

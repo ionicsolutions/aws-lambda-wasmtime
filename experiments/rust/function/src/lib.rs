@@ -53,7 +53,7 @@ fn send_response<T: Serialize>(value: &T) {
 }
 
 #[no_mangle]
-pub fn lambda_handler() -> () {
+pub fn lambda_handler() {
     let event = receive_event::<Event>();
 
     let factors = Factors {
