@@ -29,7 +29,7 @@ async fn main() -> Result<(), Error> {
     let shared_engine = &engine;
     let shared_pre_instantiated_component = &pre_instantiated_component;
     run(service_fn(move |event: LambdaEvent<Value>| async move {
-        function_handler(&shared_engine, &shared_pre_instantiated_component, event).await
+        function_handler(shared_engine, shared_pre_instantiated_component, event).await
     }))
     .await
 }

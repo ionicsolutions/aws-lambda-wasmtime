@@ -17,9 +17,9 @@ pub(crate) async fn function_handler(
         .build();
 
     let mut store = Store::new(
-        &engine,
+        engine,
         BasicState {
-            ctx: ctx,
+            ctx,
             table: ResourceTable::new(),
         },
     );
