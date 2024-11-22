@@ -1,3 +1,4 @@
+use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
 use std::io::{self, Read, Write};
 
@@ -38,7 +39,7 @@ struct Factors {
     factors: Vec<i64>,
 }
 
-fn receive_event<T: for<'de> Deserialize<'de>>() -> T {
+fn receive_event<T: DeserializeOwned>() -> T {
     let mut buf = Vec::new();
     io::stdin().read_to_end(&mut buf).unwrap();
     serde_json::from_slice(&buf).unwrap()
@@ -53,7 +54,7 @@ fn send_response<T: Serialize>(value: &T) {
 
 #[no_mangle]
 pub fn lambda_handler() -> () {
-    let event: Event = receive_event();
+    let event = receive_event::<Event>();
 
     let factors = Factors {
         factors: calculate_prime_factors(event.number),
