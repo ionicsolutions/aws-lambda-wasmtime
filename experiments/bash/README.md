@@ -56,7 +56,7 @@ This generates a `function.zip` that includes the `bootstrap` script, the
 compiled function, and the `wasmtime` CLI.
 
 When creating the Lambda function, specify the `provided.al2023` runtime
-and set the handler to `function.handler` (we ignore the latter part).
+and set the handler to `function.wasm`.
 Slightly increase the memory and timeout limits to 512 MB and 30 seconds
 to avoid timeouts or painfully slow execution times.
 
@@ -64,7 +64,7 @@ to avoid timeouts or painfully slow execution times.
 aws lambda create-function \
     --function-name my-function \
     --zip-file fileb://function.zip \
-    --handler function.handler \
+    --handler function.wasm \
     --runtime provided.al2023 \
     --memory-size 512 \
     --timeout 30 \
@@ -95,7 +95,7 @@ make package
 This generates a `function.zip` that includes the compiled function.
 
 When creating the Lambda function, specify the `provided.al2023` runtime
-and set the handler to `function.handler` (we ignore the latter part).
+and set the handler to `function.wasm`.
 Slightly increase the memory and timeout limits to 512 MB and 30 seconds
 to avoid timeouts or painfully slow execution times.
 
@@ -103,7 +103,7 @@ to avoid timeouts or painfully slow execution times.
 aws lambda create-function \
     --function-name my-function \
     --zip-file fileb://function.zip \
-    --handler function.handler \
+    --handler function.wasm \
     --runtime provided.al2023 \
     --memory-size 512 \
     --timeout 30 \

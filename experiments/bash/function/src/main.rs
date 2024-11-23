@@ -1,18 +1,19 @@
-use serde_json::{Value, Result};
-use std::collections::{HashMap};
+use serde_json::Value;
+use std::collections::HashMap;
 use std::env;
 
-fn main() -> Result<()> {
+fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
         println!("Usage: <program> <JSON event>");
         std::process::exit(1);
     }
 
-    let event: Value = serde_json::from_str(&args[1])
-        .expect("Failed to parse the input JSON event");
+    let event: Value =
+        serde_json::from_str(&args[1]).expect("Failed to parse the input JSON event");
 
-    let mut number: i64 = event.get("number")
+    let mut number: i64 = event
+        .get("number")
         .and_then(|v| v.as_i64())
         .expect("Missing or invalid \"number\" field");
 
@@ -40,8 +41,6 @@ fn main() -> Result<()> {
     }
 
     let result = HashMap::from([("factors", prime_factors)]);
-    let output = serde_json::to_string(&result)?;
+    let output = serde_json::to_string(&result).unwrap();
     println!("{}", output);
-
-    Ok(())
 }

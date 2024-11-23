@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-FILE="$LAMBDA_TASK_ROOT/$(echo "$_HANDLER" | cut -d. -f1).wasm"
+FILE="$LAMBDA_TASK_ROOT/$_HANDLER"
 
 # Find wasmtime
 if [ -f "$LAMBDA_TASK_ROOT/wasmtime" ]; then
