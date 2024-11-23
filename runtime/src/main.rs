@@ -16,7 +16,8 @@ async fn main() -> Result<(), Error> {
     add_to_linker_sync(&mut linker)?;
 
     let lambda_task_root = std::env::var("LAMBDA_TASK_ROOT").unwrap_or_else(|_| ".".to_string());
-    let component_file = std::env::var("_HANDLER")?;
+    let component_file = std::env::var("_HANDLER")
+        .expect("env variable `_HANDLER` should be set to the relative path to the component file");
     let component_path = format!("{}/{}", lambda_task_root, component_file);
     let component = Component::from_file(&engine, component_path)?;
 
