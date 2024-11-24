@@ -10,17 +10,20 @@ include!(concat!(env!("OUT_DIR"), "/bindgen_macro.rs"));
 async fn main() -> Result<(), Error> {
     tracing::init_default_subscriber();
 
-    let engine = Engine::default();
+    let component_path = {
+        let lambda_task_root =
+            std::env::var("LAMBDA_TASK_ROOT").unwrap_or_else(|_| ".".to_string());
+        let component_file = std::env::var("_HANDLER").expect(
+            "env variable `_HANDLER` should be set to the relative path to the component file",
+        );
+        format!("{}/{}", lambda_task_root, component_file)
+    };
 
+    let engine = Engine::default();
     let mut linker = Linker::<BasicState>::new(&engine);
     add_to_linker_sync(&mut linker)?;
 
-    let lambda_task_root = std::env::var("LAMBDA_TASK_ROOT").unwrap_or_else(|_| ".".to_string());
-    let component_file = std::env::var("_HANDLER")
-        .expect("env variable `_HANDLER` should be set to the relative path to the component file");
-    let component_path = format!("{}/{}", lambda_task_root, component_file);
     let component = Component::from_file(&engine, component_path)?;
-
     let instance_pre = linker.instantiate_pre(&component)?;
     let pre_instantiated_component = LambdaFunctionPre::new(instance_pre)?;
 
@@ -61,7 +64,7 @@ async fn function_handler(
     Ok(response_value)
 }
 
-pub(crate) struct BasicState {
+struct BasicState {
     ctx: WasiCtx,
     table: ResourceTable,
 }
